@@ -101,7 +101,7 @@ const WatchList = () => {
 
   const fetchStockData = async (symbol) => {
     try {
-      const url = `http://localhost:5000/api/stock/${symbol}`;
+      const url = `https://investox-az5r.onrender.com/api/stock/${symbol}`;
       const res = await axios.get(url);
 
       const result = res.data.chart.result[0];
@@ -201,45 +201,25 @@ const WatchListItem = ({ stock }) => {
         </div>
       </div>
       {showWatchlistActions && (
-        <span className="actions">
-          <Tooltip
-            title="Buy (B)"
-            placement="top"
-            arrow
-            TransitionComponent={Grow}
-            onClick={handleBuyClick}
-          >
-            <button className="buy">Buy</button>
-          </Tooltip>
-          <Tooltip
-            title="Sell (S)"
-            placement="top"
-            arrow
-            TransitionComponent={Grow}
-          >
-            <button className="sell">Sell</button>
-          </Tooltip>
-          <Tooltip
-            title="Analytics (A)"
-            placement="top"
-            arrow
-            TransitionComponent={Grow}
-          >
-            <button className="action">
-              <BarChartOutlined className="icon" />
-            </button>
-          </Tooltip>
-          <Tooltip
-            title="More"
-            placement="top"
-            arrow
-            TransitionComponent={Grow}
-          >
-            <button className="action">
-              <MoreHoriz className="icon" />
-            </button>
-          </Tooltip>
-        </span>
+        <span className="actions" style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+  <Tooltip title="Buy (B)" placement="top" arrow TransitionComponent={Grow}>
+    <button className="buy" onClick={handleBuyClick}>B</button>
+  </Tooltip>
+  <Tooltip title="Sell (S)" placement="top" arrow TransitionComponent={Grow}>
+    <button className="sell">S</button>
+  </Tooltip>
+  <Tooltip title="Analytics (A)" placement="top" arrow TransitionComponent={Grow}>
+    <button className="icon">
+      <BarChartOutlined fontSize="small" />
+    </button>
+  </Tooltip>
+  <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
+    <button className="icon">
+      <MoreHoriz fontSize="small" />
+    </button>
+  </Tooltip>
+</span>
+
       )}
     </li>
   );

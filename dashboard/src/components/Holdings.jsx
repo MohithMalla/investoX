@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios, { all } from "axios";
+import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
-
-// import { holdings } from "../data/data";
+import { holdings } from "../data/data";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
@@ -44,14 +43,26 @@ const Holdings = () => {
   //   ],
   // };
 
+const totalInvestment = holdings.reduce((sum, stock) => {
+  return sum + stock.avg * stock.qty;
+}, 0);
+
+const currentValue = holdings.reduce((sum, stock) => {
+  return sum + stock.price * stock.qty;
+}, 0);
+
+const profitLoss = currentValue - totalInvestment;
+const profitLossPercent = (profitLoss / totalInvestment) * 100;
+
+
   return (
     <>
-      <h3 className="title">Holdings ({allHoldings.length})</h3>
+      <h3 className="title" style={{marginTop:"-40px",marginBottom:"10px"}}>Holdings ({holdings.length})</h3>
 
       <div className="order-table">
         <table>
   <thead>
-    <tr>
+    <tr >
       <th>Instrument</th>
       <th>Qty.</th>
       <th>Avg. cost</th>
@@ -63,14 +74,16 @@ const Holdings = () => {
     </tr>
   </thead>
   <tbody>
-    {allHoldings.map((stock, index) => {
+    {holdings.map((stock, index) => {
       const curValue = stock.price * stock.qty;
       const isProfit = curValue - stock.avg * stock.qty >= 0.0;
       const profClass = isProfit ? "profit" : "loss";
       const dayClass = stock.isLoss ? "loss" : "profit";
 
+
+
       return (
-        <tr key={index}>
+        <tr key={index} style={{width:"95%"}}>
           <td>{stock.name}</td>
           <td>{stock.qty}</td>
           <td>{stock.avg.toFixed(2)}</td>
@@ -89,21 +102,24 @@ const Holdings = () => {
 
       </div>
 
-      <div className="row">
-        <div className="col">
+      <div className="row mt-4" >
+        <div className="col text-center">
           <h5>
-            29,875.<span>55</span>{" "}
+            {totalInvestment.toFixed(2)}
           </h5>
           <p>Total investment</p>
         </div>
-        <div className="col">
+        <div className="col text-center">
           <h5>
-            31,428.<span>95</span>{" "}
+              {currentValue.toFixed(2)}
           </h5>
           <p>Current value</p>
+
         </div>
-        <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+        <div className="col text-center">
+          <h5>
+            {profitLoss.toFixed(2)} ({profitLossPercent.toFixed(2)}%)
+          </h5>
           <p>P&L</p>
         </div>
       </div>

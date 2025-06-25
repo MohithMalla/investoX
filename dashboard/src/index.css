@@ -163,6 +163,13 @@ code {
   border-top: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
 }
+table tr td,
+table tr th {
+  padding: 1px 1px; /* Adjust as needed */
+  font-size: 10px;  /* Optional: shrink text too */
+  line-height: 1; /* Optional: reduce vertical spacing */
+}
+
 
 .order-table th {
   text-align: right;
@@ -198,6 +205,57 @@ code {
   font-size: 0.9rem;
   color: rgb(73, 73, 73);
 }
+
+.order-table {
+          width: 100%;
+          overflow-x: auto;
+          margin-bottom: 20px;
+        }
+
+        .order-table table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 600px;
+        }
+
+        .order-table th,
+        .order-table td {
+          padding: 6px 12px;
+          text-align: left;
+          white-space: nowrap;
+        }
+
+        .investment-summary {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin: 0 20px;
+        }
+
+        .investment-summary .col {
+          flex: 1 1 200px;
+          min-width: 150px;
+        }
+
+        .profit {
+          color: green;
+        }
+
+        .loss {
+          color: red;
+        }
+
+        @media (max-width: 768px) {
+          .title {
+            font-size: 1.2rem;
+            text-align: center;
+          }
+
+          .investment-summary {
+            flex-direction: column;
+            margin: 0 10px;
+          }
+        }
 
 .align-left {
   text-align: left;
@@ -734,32 +792,42 @@ hr {
   margin-right: 8px;
   cursor: pointer;
 }
+.buy,
+.sell,
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
 
 .buy {
-  background-color: #4184f3;
-  color: #fff;
-  font-weight: 400;
-  font-size: 0.8rem;
-  border: 0.7px solid #4184f3;
+  background-color: #1e90ff;
+  color: white;
 }
 
 .sell {
   background-color: #ff5722;
-  color: #fff;
-  font-weight: 400;
-  font-size: 0.8rem;
-  border: 0.7px solid #ff5722;
-}
-
-.action {
-  background-color: #fff;
-  border: 0.7px solid #9b9b9b;
+  color: white;
 }
 
 .icon {
-  transform: scale(0.7);
-  color: rgb(65, 65, 65);
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #333;
 }
+
+
+
+
+
 
 .watchlist-number {
   height: 6%;
